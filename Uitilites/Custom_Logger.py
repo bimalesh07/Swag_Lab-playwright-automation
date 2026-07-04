@@ -1,35 +1,28 @@
-import os
 import logging
-from datetime import datetime
-import pytest
+import os
 
-@pytest.fixture(scope="session")
-def logger():
-    #create a logs folders if not exits in 
-    log_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "logs")
-    if not os.path.exists(log_dir):
-        os.makedirs(log_dir)
+class CustomLogger:
+    @staticmethod
+    def get_logger():
+        # Logs folder banana agar nahi hai toh
+        if not os.path.exists("Logs"):
+            os.makedirs("Logs")
+
+        logger = logging.getLogger("swagLab_Log")
         
-    # uniue name
-    log_file = os.path.join(log_dir, "automation.log")
-    
-    # Logger object create
-    logger_obj = logging.getLogger("FrameworkLogger")
-    logger_obj.setLevel(logging.INFO)
-    
-    # Avoid duplicate handlers if fixture runs multiple times
-    if not logger_obj.handlers:
-        # Format (Time | Log Level | Message)
-        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
-        
-        #File Handler (write in logs file )
-        file_handler = logging.FileHandler(log_file, mode='a') # 'a' append
-        file_handler.setFormatter(formatter)
-        logger_obj.addHandler(file_handler)
-        
-        #print in terminal
-        console_handler = logging.StreamHandler()
-        console_handler.setFormatter(formatter)
-        logger_obj.addHandler(console_handler)
-        
-    return logger_obj
+        #logger
+        if not logger.handlers:
+            logger.setLevel(logging.INFO)
+            formatter = logging.Formatter("%(asctime)s [%(levelname)s] - %(message)s", datefmt="%H:%M:%S")
+
+            #print in console
+            console_handler = logging.StreamHandler()
+            console_handler.setFormatter(formatter)
+            logger.addHandler(console_handler)
+
+            # for save 
+            file_handler = logging.FileHandler("logs/automation.log", mode="a")
+            file_handler.setFormatter(formatter)
+            logger.addHandler(file_handler)
+
+        return logger
