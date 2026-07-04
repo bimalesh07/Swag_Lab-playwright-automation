@@ -10,24 +10,24 @@ def logger():
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
         
-    # 2. Har run ke liye ek unique log file ka naam (Optional, ya fir static automation.log rakh sakte ho)
+    # uniue name
     log_file = os.path.join(log_dir, "automation.log")
     
-    # 3. Logger object create karo
+    # Logger object create
     logger_obj = logging.getLogger("FrameworkLogger")
     logger_obj.setLevel(logging.INFO)
     
     # Avoid duplicate handlers if fixture runs multiple times
     if not logger_obj.handlers:
-        # 4. Format set karo (Time | Log Level | Message)
+        # Format (Time | Log Level | Message)
         formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
         
-        # 5. File Handler (Jo logs file me likhega)
-        file_handler = logging.FileHandler(log_file, mode='a') # 'a' matlab append, purane logs ke niche naya judega
+        #File Handler (write in logs file )
+        file_handler = logging.FileHandler(log_file, mode='a') # 'a' append
         file_handler.setFormatter(formatter)
         logger_obj.addHandler(file_handler)
         
-        # 6. Console Handler (Jo terminal par bhi print karega)
+        #print in terminal
         console_handler = logging.StreamHandler()
         console_handler.setFormatter(formatter)
         logger_obj.addHandler(console_handler)
