@@ -1,0 +1,35 @@
+
+# 1. Python Virtual Environment & Environment Dependencies
+.venv/
+venv/
+ENV/
+env/
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# 2. Testing Framework Caches & Temporary Configurations
+.pytest_cache/
+.testmondata
+.cache/
+.pytest_cache/**/*
+
+# 3. Secure Environment Configurations (CRITICAL: NEVER PUSH SECRETS)
+.env
+*.env
+config.ini
+
+# 4. System Generated Execution Artifacts (Logs & Reports)
+Logs/
+Reports/
+ScreenShots/
+*.log
+*.html
+*.png
+
+# 5. OS & IDE Specific User Files
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
