@@ -7,7 +7,6 @@ logger = CustomLogger.get_logger()
 
 @pytest.fixture(scope="class")
 def class_page_setup(browser: Browser): 
-
     logger.info("[CLASS FIXTURE] Starting Browser Session")
     base_url = ReadEnv.get_base_url()
 

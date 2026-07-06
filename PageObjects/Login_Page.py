@@ -1,29 +1,25 @@
-from playwright.sync_api import sync_playwright, expect, Page
-from Uitilites.Custom_Logger import CustomLogger
-from Uitilites.Read_Env import ReadEnv
+import pytest
+from playwright.sync_api import Page, expect
 
-class LoginPage:
-
-    def __init__(self, page:Page, logger):
+class Login_Page:
+    def __init__(self, page: Page, logger):
         self.page = page
         self.logger = logger
+        
+        # Locators
+        self.username_textbox = "#user-name"
+        self.password_textbox = "#password"
+        self.login_button = "#login-button"
+        self.header_title = "span.title" 
 
-        #locaters
-        self.input_username = "#user-name"
-        self.input_password = "#password"
-        self.login_btn = "#login-button"
-        self.logo_visible = ".app_logo"
+    def Login_to_SourceLab(self, username, password):
+        self.logger.info("************** START LOGIN ***********")
+        self.page.locator(self.username_textbox).fill(username)
+        self.page.locator(self.password_textbox).fill(password)
+        self.page.locator(self.login_button).click()
+        self.logger.info("************** LOGIN PROCESS COMPLETED ***********")
 
-    def Login_to_SourceLab(self,userane, password):
-        self.logger.info("**************START LOGN ***********")
-        self.page.locator(self.input_username).fill(userane)
-        self.page.locator(self.input_password).fill(password)
 
-        btn_click = self.page.locator(self.login_btn)
-        btn_click.click()
-    
     def Verify_Login_display(self):
-        return self.page.locator(self.logo_visible)
-
-
-
+        self.logger.info("*********** Verifying Login Display Element ***********")
+        return self.page.locator(self.header_title)
