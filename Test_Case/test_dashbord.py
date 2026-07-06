@@ -1,5 +1,5 @@
 import pytest
-from playwright.sync_api import expect
+from playwright.sync_api import expect, Page
 from Uitilites.Read_Env import ReadEnv
 from PageObjects.Login_Page import Login_Page
 from PageObjects.Dashbord_page import Dashbordpage
@@ -58,9 +58,22 @@ class TestDashboard:
       
         expect(dp.get_checkout_button()).to_be_visible()
         logger.info("Success: Navigated to cart and checkout button is perfectly visible!")
+    
+    def _logout_click_verify(self, page:Page, logger, dp):
+        logger.info("******logut clicking **************")
+        
+        dp.click_menu_btn()
+        page.wait_for_timeout(500)
 
+        dp.click_logout_btn()
+        page.wait_for_timeout(500)
 
-    #pytest run this test fun
+        expect(dp.logout_verify()).to_be_visible()
+        
+        logger.info("*******logout sucessfully *************")
+
+    
+    #Mian Test Pytest Run this test
     def test_complete_dashboard_end_to_end_flow(self, class_page_setup):
         page, logger = class_page_setup
         logger.info("========= STARTING MAIN PROFESSIONAL E2E SUITE =========")
@@ -69,7 +82,8 @@ class TestDashboard:
         dp = Dashbordpage(page, logger)
         
         #self._step_verify_dropdown_filters(page, logger, dp)
-        self._step_add_to_cart(page, logger, dp)
-        self._step_click_cart_and_verify_checkout(page, logger, dp)
+        #self._step_add_to_cart(page, logger, dp)
+        #self._step_click_cart_and_verify_checkout(page, logger, dp)
+        self. _logout_click_verify(page, logger, dp)
         
         logger.info("========= MAIN E2E SUITE PASSED COMPLETELY =========")

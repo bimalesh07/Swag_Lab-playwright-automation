@@ -14,6 +14,13 @@ class Dashbordpage:
         # Locators for Cart Page Action
         self.Cart_link_path = ".shopping_cart_link"  
         self.checkout_btn_visible = "#checkout"
+
+        #logout locatoers
+        self.menu_btn_path ="#react-burger-menu-btn"
+        self.logout_link ="#logout_sidebar_link"
+        self.login_btn_visible = "#login-button"
+
+
     
     def sort_products_by_value(self, option_value):
         self.logger.info(f"******* Checking Dropdown filters for value: {option_value} **********")
@@ -42,4 +49,16 @@ class Dashbordpage:
     def get_checkout_button(self):
         self.logger.info("Fetching checkout button locator from Cart Page")
         return self.page.locator(self.checkout_btn_visible)
-  
+    
+    def click_menu_btn(self):
+        self.logger.info("********Clicking the Menu btn *********")
+        self.page.locator(self.menu_btn_path).click()
+    
+    def click_logout_btn(self):
+        self.logger.info("*******Logout btn clicking *************")
+        self.page.locator(self.logout_link).click()
+
+    def logout_verify(self):
+        self.logger.info("**********Logout verify ************")
+        return self.page.locator(self.login_btn_visible)
+    

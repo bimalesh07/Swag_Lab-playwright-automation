@@ -33,3 +33,5 @@ ScreenShots/
 .idea/
 Thumbs.db
 .DS_Store
+
+test_invalid.py
