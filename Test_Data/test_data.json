@@ -1,0 +1,30 @@
+[
+  {
+    "scenario": "Valid Login",
+    "username": "standard_user",
+    "password": "secret_sauce",
+    "is_valid": true,
+    "expected_error": ""
+  },
+  {
+    "scenario": "Invalid Username and Password",
+    "username": "bimalesh",
+    "password": "yadav",
+    "is_valid": false,
+    "expected_error": "Username and password do not match any user in this service"
+  },
+  {
+    "scenario": "Empty Username",
+    "username": "",
+    "password": "yadav",
+    "is_valid": false,
+    "expected_error": "Username is required"
+  },
+  {
+    "scenario": "Empty Password",
+    "username": "bimalesh",
+    "password": "",
+    "is_valid": false,
+    "expected_error": "Password is required"
+  }
+]
