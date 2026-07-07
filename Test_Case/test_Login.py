@@ -12,7 +12,7 @@ class TestLogin:
         logger.info("********* Start Login Project ************")
         
         lp = Login_Page(page, logger)
-        lp.Login_to_SourceLab(self.usr, self.pwd)  
+        lp.Login_to_SourceLab(self.usr, self.usr)  
 
         expect(lp.Verify_Login_display()).to_be_visible()
         logger.info("********* Login Successfully **********")
